@@ -1,0 +1,70 @@
+	
+<div class="col-md-10">
+				<%= link_to 'Back', locations_path, :class => 'btn btn-info ' %>
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<h1>location details</h1>
+		</div>
+		<div class="well">
+			<strong> Name:</strong><br>
+			<%= @location.name %>
+			<br>
+			<br>
+			<strong> address:</strong><br>
+			<%= @location.address %>
+			<br>
+			<br>
+			<strong> description:</strong><br>
+			<div>
+				<% if @location.description.length > 0 %>
+				<%= truncate(@location.description, length: 250) %>
+				<a type="button" class="read-more-#{@location.id}" href="#test_modal" data-toggle="modal">...read more</a>
+
+			<div class="modal fade img-responsive" id="test_modal" style="width: 60%; height: 400px; margin-left: 21%; margin-top: 8%;">
+  <div class="modal">
+    <a class="close" data-dismiss="modal">&times;</a>
+    <h3></h3>
+  </div>
+  <div class="modal-body" style="color: black; background-color: white;">
+				<div class="panel panel-primary">
+		
+					<div class="panel-body">
+						
+				<%= @location.description %>
+					</div>
+				
+				</div>
+				<script>
+					$('.read-more-<%= @location.id %>').on('click', function(e) {
+						e.preventDefault()
+						$(this).parent().html('<%= escape_javascript @location.description %>')
+					})
+				</script>
+				<% else %>
+				<%= @location.description %>
+				<% end %>
+    <a href="#" class="btn btn-primary" data-dismiss="modal" style="margin-left: 47%
+    ">Close</a>
+				</div>
+</div>
+				<br>
+				<br>
+				<h1>My Images</h1>
+				<%= form_for(Image.new, html: { multipart: true, class: "dropzone"}) do |f|  %>
+				<div class="fallback">
+					<%= f.file_field :avatar %><br>
+					<%= f.submit "Upload my Avatar" %>
+				</div>
+				<% end %>
+				<div class="index">
+					<%= render "index" %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="col-md-2"> 
+	<h3>Nearby locations</h3>
+	<%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@location.latitude}%2C#{@location.longitude}" %>
+</div>

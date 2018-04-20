@@ -1,0 +1,30 @@
+ <h1>Listing location</h1>
+<div class="table-responsive">
+<table class="table table-hover table-inverse">
+        <thead>
+             <tr>
+                <th>Name:</th>
+                <th>address:</th>
+                <th>description:</th>
+                <th>show:</th>
+                <th>edit:</th>
+                <th>delete:</th>
+          </tr>
+    </thead>
+    <tbody>
+      <% @locations.each do |location| %>
+      <tr>
+          <td><%= location.name %></td>
+          <td><%= location.address %></td>
+          <td><%= location.description %></td>
+          <td><%= link_to 'Show', location_path(location), :class => 'btn btn-success ' %></td>
+          <td><%= link_to 'Edit', edit_location_path(location), :class => 'btn btn-info ' %></td>
+          <td><%= link_to 'Destroy', location_path(location),
+              method: :delete,
+              data: { confirm: 'are you sure'}, :class => 'btn btn-danger ' %></td>
+      </tr>
+        <% end %>
+  </tbody>
+</table>
+</div>
+<td><%= link_to 'New location', new_location_path, :class => 'btn btn-primary '%></td>

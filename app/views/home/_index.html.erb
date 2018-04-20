@@ -1,0 +1,50 @@
+
+<div class="modal-dialog" role="document">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title" id="myModalLabel"></h4>
+		</div>
+		<div class="modal-body">
+			<div class="panel panel-black" style="margin-top: -3%; background-color: #1c2a48;">
+				<div class="panel-heading" >
+					<i><b><h1 style="color: white; text-align: center;">Log in</h1></b></i>
+				</div>
+				<div class="well">
+					<%if user_signed_in?%>
+					<div class="actions">
+						<%#= link_to "Logout", destroy_user_session_path, method: :delete %>
+					</div>
+
+					<% else current_user %>
+					<%= form_for(:user, :url => session_path(:user), remote: true) do |f| %>
+					<div class="field form-group">
+						<%= f.label :email, :class => 'control-label col-lg-2'  %><br />
+						<%= f.email_field :email, autofocus: true, :class => 'form-control' %>
+					</div>
+
+					<div class="field">
+						<%= f.label :password, :class => 'control-label col-lg-2' %><br />
+						<%= f.password_field :password, autocomplete: "off", :class => 'form-control' %>
+					</div>
+					<br>
+					<div class="field">
+						<%= f.check_box :remember_me  %>
+						<%= f.label :remember_me %>
+					</div>
+
+					<div class="actions ">
+						<%= f.submit "Log in", :class => 'btn btn-success'%>
+					</div>
+
+					<% end %>
+
+					<% end %>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		</div>
+	</div>
+</div>
